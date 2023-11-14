@@ -98,7 +98,7 @@ public class Main {
 				}
 				
 			
-			
+			//SemiFinal
 			List<Guerrero> ganador1 = peleaDeEJercitos(marines, mohicanos);
 			imprimirEjercito(ganador1);
 			System.out.println(ganador1.size());
@@ -111,7 +111,14 @@ public class Main {
 			
 			List<Guerrero> ganador3 = peleaDeEJercitos(zulus, ganador1);	
 			imprimirEjercito(ganador3);
-
+			System.out.println(ganador3.size());
+			
+			//Final
+			List<Guerrero> final1 = peleaDeEJercitos(ganador1,ganador2);
+			
+			List<Guerrero> final2 =  peleaDeEJercitos(final1,ganador3);
+			System.out.println("El ganador de la final es: ");
+			imprimirEjercito(final2);
 
 	}
 
