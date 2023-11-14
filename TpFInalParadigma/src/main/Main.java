@@ -41,7 +41,6 @@ public class Main {
 			marines.add(marine);
 		}
 		
-		System.out.println(marines.size());
 		
 		//Ejercito de Ninjas
 		List<Guerrero> ninjas = new LinkedList<Guerrero>();
@@ -99,48 +98,53 @@ public class Main {
 				}
 				
 			
-		
+			
 			List<Guerrero> ganador1 = peleaDeEJercitos(marines, mohicanos);
 			imprimirEjercito(ganador1);
+			System.out.println(ganador1.size());
+			System.out.println(ganador1.get(2).getNivelVida());
 
 			List<Guerrero> ganador2 = peleaDeEJercitos(samurais, ninjas);	
 			imprimirEjercito(ganador2);
-
-			List<Guerrero> ganador3 = peleaDeEJercitos(zulus, marines);	
+			System.out.println(ganador2.size());
+			System.out.println(ganador2.get(0).getNivelVida());
+			
+			List<Guerrero> ganador3 = peleaDeEJercitos(zulus, ganador1);	
 			imprimirEjercito(ganador3);
 
 
 	}
+
+
+
+	    public static List<Guerrero> peleaDeEJercitos(List<Guerrero> ejercito1, List<Guerrero> ejercito2) {
+	        Iterator<Guerrero> iterator1 = ejercito1.iterator();
+	        Iterator<Guerrero> iterator2 = ejercito2.iterator();
+
+	        while (iterator1.hasNext() && iterator2.hasNext()) {
+	            Guerrero soldado1 = iterator1.next();
+	            Guerrero soldado2 = iterator2.next();
+
+	            while (soldado1.getNivelVida() > 0 && soldado2.getNivelVida() > 0) {
+	                soldado2 = soldado1.atacar(soldado2);
+	                soldado1 = soldado2.atacar(soldado1);
+	            }
+
+	            if (soldado1.getNivelVida() <= 0) {
+	                System.out.println("El " + soldado1.getClass().getSimpleName() + " murió");
+	                iterator1.remove();
+	            }
+
+	            if (soldado2.getNivelVida() <= 0) {
+	                System.out.println("El " + soldado2.getClass().getSimpleName() + " murió");
+	                iterator2.remove();
+	            }
+	        }
+
+	        return ejercito1.isEmpty() ? ejercito2 : ejercito1;
+	    }
+
 	
-	public static List<Guerrero> peleaDeEJercitos(List<Guerrero> ejercito1,List<Guerrero> ejercito2){
-		int i = 0;
-		while (i < ejercito1.size() && i < ejercito2.size()) {
-			Guerrero guerrero1 = ejercito1.get(i);
-			Guerrero guerrero2 = ejercito2.get(i);
-			
-			guerrero1.atacar(guerrero2);
-			List<Guerrero> enfrentamiento = new ArrayList<Guerrero>();
-			enfrentamiento.add(guerrero1);
-			enfrentamiento.add(guerrero2);
-
-			Collections.sort(enfrentamiento, new ComparadorDeGuerrero());
-
-			// El primer guerrero en la lista es el que tiene mayor "potencia de ataque"
-			Guerrero ganador =enfrentamiento.get(0);
-
-			if(ejercito1.contains(ganador)) {
-				ejercito2.remove(i);
-			}else {
-				ejercito1.remove(i);
-			}
-		}
-
-		if(ejercito1.size() < ejercito2.size()) {
-			return ejercito2;
-		}
-		
-		return ejercito1;
-	}
 
 	public static void imprimirEjercito(List<Guerrero> ejercito){
 		Guerrero soldado = ejercito.get(0);

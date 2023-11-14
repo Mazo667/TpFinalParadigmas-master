@@ -11,8 +11,17 @@ public abstract class Arrojadizo extends Arma implements Agotable{
 	    this.setCantidad(cantidad);
 	  }
 	
-	
-
+	  @Override
+	public void disparar() {
+		setCantidad(cantidad--);
+		
+	}
+	  
+	  @Override
+	public int getCantidad() {
+		return this.cantidad;
+	}
+	  
 
 	public void setCantidad(int cantidad) {
 		this.cantidad = cantidad;

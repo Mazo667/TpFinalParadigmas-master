@@ -9,4 +9,5 @@ public class Shuriken extends Arrojadizo{
 		// TODO Auto-generated constructor stub
 	}
 
+
 }

@@ -12,21 +12,21 @@ public abstract class Fuego extends Arma implements Recargable{
 	    this.municion = municion;
 	  }
 	  
-	  @Override
-	public void agotar() {
-		this.municion = 0;
-		
-	}
-	  
-	  @Override
-	public void recargar() {
-		// TODO Auto-generated method stub
-		
-	}
-	  
-	  public int getMunicion() {
+		@Override
+		public void disparar() {
+			setMunicion(municion--);
+		}
+	
+		@Override
+		public int getCantidad() {
 			return municion;
 		}
+	  
+		  @Override
+		public void recargar() {
+			System.out.println("Se esta recargando");
+		}
+	  
 
 		public void setMunicion(int municion) {
 			this.municion = municion;

@@ -13,7 +13,7 @@ public abstract class Guerrero {
 	    this.secundaria = secundaria;
 	  }
 	  
-	  public abstract void atacar(Guerrero otro);
+	  public abstract Guerrero atacar(Guerrero otro);
 	  
 	  public double getNivelVida() {
 			return nivelVida;

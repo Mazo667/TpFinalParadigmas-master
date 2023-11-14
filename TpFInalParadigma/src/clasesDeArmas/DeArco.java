@@ -10,10 +10,10 @@ public abstract class DeArco extends Arma implements Agotable{
 	    super(daño,efectividad);
 	    this.cantidad = cantidad;
 	  }
-	  
-	  @Override
-	public void agotar() {
-		this.cantidad = 0;
+	
+	@Override
+	public void disparar() {
+		setCantidad(cantidad--);
 	}
 	  
 	public int getCantidad() {
