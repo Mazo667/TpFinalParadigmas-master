@@ -90,9 +90,9 @@ public class Main {
 				for(int i = 0;i < 30;i++) {
 					Mohicano mohicano = new 
 							Mohicano(100,
-									generarNumeroAleatorio(70, 96),
+									generarNumeroAleatorio(70,96),
 									new Hacha(85, 62, 100),
-									new Winchester(60,45, 20)
+									new Winchester(60,45,20)
 									);
 					mohicanos.add(mohicano);
 				}
@@ -101,59 +101,77 @@ public class Main {
 			//SemiFinal
 			List<Guerrero> ganador1 = peleaDeEJercitos(marines, mohicanos);
 			imprimirEjercito(ganador1);
-			System.out.println(ganador1.size());
-			System.out.println(ganador1.get(2).getNivelVida());
 
+			System.out.println("---------------------------------------");
 			List<Guerrero> ganador2 = peleaDeEJercitos(samurais, ninjas);	
 			imprimirEjercito(ganador2);
-			System.out.println(ganador2.size());
-			System.out.println(ganador2.get(0).getNivelVida());
 			
+			System.out.println("---------------------------------------");
 			List<Guerrero> ganador3 = peleaDeEJercitos(zulus, ganador1);	
 			imprimirEjercito(ganador3);
-			System.out.println(ganador3.size());
+			
+			System.out.println("---------------------------------------");
 			
 			//Final
 			List<Guerrero> final1 = peleaDeEJercitos(ganador1,ganador2);
-			
+			System.out.println("---------------------------------------");
 			List<Guerrero> final2 =  peleaDeEJercitos(final1,ganador3);
 			System.out.println("El ganador de la final es: ");
 			imprimirEjercito(final2);
-
+			
 	}
 
 
 
 	    public static List<Guerrero> peleaDeEJercitos(List<Guerrero> ejercito1, List<Guerrero> ejercito2) {
-	        Iterator<Guerrero> iterator1 = ejercito1.iterator();
-	        Iterator<Guerrero> iterator2 = ejercito2.iterator();
-
-	        while (iterator1.hasNext() && iterator2.hasNext()) {
-	            Guerrero soldado1 = iterator1.next();
-	            Guerrero soldado2 = iterator2.next();
-
-	            while (soldado1.getNivelVida() > 0 && soldado2.getNivelVida() > 0) {
-	                soldado2 = soldado1.atacar(soldado2);
-	                soldado1 = soldado2.atacar(soldado1);
-	            }
-
-	            if (soldado1.getNivelVida() <= 0) {
-	                System.out.println("El " + soldado1.getClass().getSimpleName() + " murió");
-	                iterator1.remove();
-	            }
-
-	            if (soldado2.getNivelVida() <= 0) {
-	                System.out.println("El " + soldado2.getClass().getSimpleName() + " murió");
-	                iterator2.remove();
-	            }
-	        }
-
-	        return ejercito1.isEmpty() ? ejercito2 : ejercito1;
+	    		
+	    		for(int i = 0; i < ejercito1.size() && i < ejercito2.size();i++) {
+	    			
+	    			if(ejercito1.get(i) != null && ejercito2.get(i) != null) {
+			
+						// ataco al soldado del ejercito 2
+						ejercito1.get(i).atacar(ejercito2.get(i));
+			
+						// verifico su vida
+						if (ejercito2.get(i).getNivelVida() <= 0) {
+							System.out.println("El soldado " + ejercito2.get(i).getClass().getSimpleName() + " murio.");
+							ejercito2.remove(i);
+						} else {
+							// soldado del ejercito 2 contraataca a soldado del ejercito 1
+							ejercito2.get(i).atacar(ejercito1.get(i));
+						}
+						
+						// verifico su vida
+						if (ejercito1.get(i).getNivelVida() <= 0) {
+							System.out.println("El soldado " + ejercito1.get(i).getClass().getSimpleName() + " murio.");
+							ejercito1.remove(i);
+						}
+						
+	    			}else {
+	    				break;
+	    			}
+		    		
+		    	}
+		    	
+	    		
+	    		if(ejercito1.size() > 0 && ejercito2.size() > 0) {
+	    			System.out.println( ">>>>" + ejercito1.size() + " " +  ejercito2.size());
+	    			List<Guerrero> ganador;
+	    			return ganador = peleaDeEJercitos(ejercito1,ejercito2);
+	    		}
+	    		
+	    		
+	    	
+	    		
+	    		return ejercito1.size() > ejercito2.size() ? ejercito1 : ejercito2;
 	    }
 
 	
 
 	public static void imprimirEjercito(List<Guerrero> ejercito){
+		if (ejercito == null ) {
+			return;
+		}
 		Guerrero soldado = ejercito.get(0);
 		if(soldado instanceof Marine){
 			System.out.println("Ganaron los Marines");

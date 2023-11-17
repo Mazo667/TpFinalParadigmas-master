@@ -25,7 +25,7 @@ public class Marine extends Guerrero{
 			return efectotalP;
 		}
 
-		public void setEfectotalP(double fuerza,double daño, double efectividad ) {
+		private void setEfectotalP(double fuerza,double daño, double efectividad ) {
 			this.efectotalP = (fuerza * daño) / efectividad;
 		}
 		
