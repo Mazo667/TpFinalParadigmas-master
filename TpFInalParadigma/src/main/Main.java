@@ -98,7 +98,7 @@ public class Main {
 				}
 				
 			
-			//SemiFinal
+			//Primeras peleas
 			List<Guerrero> ganador1 = peleaDeEJercitos(marines, mohicanos);
 			imprimirEjercito(ganador1);
 
@@ -112,9 +112,11 @@ public class Main {
 			
 			System.out.println("---------------------------------------");
 			
-			//Final
+			//Semi Final
 			List<Guerrero> final1 = peleaDeEJercitos(ganador1,ganador2);
+			imprimirEjercito(final1);
 			System.out.println("---------------------------------------");
+			//Final
 			List<Guerrero> final2 =  peleaDeEJercitos(final1,ganador3);
 			System.out.println("El ganador de la final es: ");
 			imprimirEjercito(final2);
@@ -124,9 +126,10 @@ public class Main {
 
 
 	    public static List<Guerrero> peleaDeEJercitos(List<Guerrero> ejercito1, List<Guerrero> ejercito2) {
-	    		
+	    		//Me aseguro que el for siempre sea menor a la cantidad de soldados de cada ejercito
 	    		for(int i = 0; i < ejercito1.size() && i < ejercito2.size();i++) {
 	    			
+	    			//Me aseguro que no sean null
 	    			if(ejercito1.get(i) != null && ejercito2.get(i) != null) {
 			
 						// ataco al soldado del ejercito 2
@@ -148,12 +151,13 @@ public class Main {
 						}
 						
 	    			}else {
+	    				//Si en el caso un soldado no se enfrenta con nadie salgo del for
 	    				break;
 	    			}
 		    		
 		    	}
 		    	
-	    		
+	    		//Llamada recursiva para que los soldados sigan peleando
 	    		if(ejercito1.size() > 0 && ejercito2.size() > 0) {
 	    			System.out.println( ">>>>" + ejercito1.size() + " " +  ejercito2.size());
 	    			List<Guerrero> ganador;
@@ -161,7 +165,6 @@ public class Main {
 	    		}
 	    		
 	    		
-	    	
 	    		
 	    		return ejercito1.size() > ejercito2.size() ? ejercito1 : ejercito2;
 	    }
@@ -169,9 +172,6 @@ public class Main {
 	
 
 	public static void imprimirEjercito(List<Guerrero> ejercito){
-		if (ejercito == null ) {
-			return;
-		}
 		Guerrero soldado = ejercito.get(0);
 		if(soldado instanceof Marine){
 			System.out.println("Ganaron los Marines");
